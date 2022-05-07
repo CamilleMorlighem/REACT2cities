@@ -1,3 +1,25 @@
+# ------------------------------------------------------------------------------------------------------------------
+# Modelling of the intra-urban malaria risk using socioeconomic and environmental factors with a random forest (RF) model
+# in two sub-Saharan cities: Kampala (Uganda) and Dar es Salaam (Tanzania)
+#  
+# More specifically, we used as 
+# - Dependent variable : a malaria prevalence metric: the Plasmodium falciparum Parasite Rate standardized over the two-to-ten age range (PfPR2-10)
+# - Predictors: 
+#       - Normalized Difference Vegetation Index (NDVI) and Normalized Difference Wetness Index (NDWI)
+#       - Elevation (Shuttle Radar Topography Mission (SRTM))
+#       - variables from  different geospatial datasets: 
+#             - pseudo climatic variables (COSMO) 
+#             - local climate zone (LCZ), each variable is the proportion of coverage of one specific LCZs 
+#             - land cover and land use (LULC), developed at very high-resolution, each variable is the proportion of a LC/LU
+#             
+# 
+# This script performs all the following steps to model and predict PfPR2-10: 
+#   1) select malaria surveys 
+#   2) extract covariates 
+#   3) RF modelling 
+#   4) RF predictions
+#--------------------------------------------------------------------------------------------------------------------------
+
 
 rm(list=ls())
 
