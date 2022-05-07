@@ -15,12 +15,12 @@ Malaria prevalence data (see folder `Data\Malaria_data\`) come from an open onli
 
 ### Geospatial datasets
 
-The following four geospatial datasets (see folder `Data\Variables\`) are used as covariates for modelling and mapping *Pf*PR<sub>2-10</sub>: 
+The following four geospatial datasets (see folder `Data\Variables\`) are used as covariates for modelling and mapping *Pf*PR<sub>2-10</sub> : 
 
 * Pseudo-climate variables (COSMO) : Pseudo-climate variables are 1 km resolution raster grids produced by the COSMO-CLM model. They represent different climate variables as aggregate values (average, maximum or minimum) for the dry season (June to September 2014) [[3](#3)].
 * Local climate zones (LCZ) : LCZ maps are binary maps of 100 m resolution classifying pixels into areas of uniform surface cover and structure with a specific temperature regime [[4](#4)]. They were derived applying a random forest (RF) classification algorithm to Landsat, USGS and Sentinel imagery from 2017 to 2019 [[5](#5)-[6](#6)]. 
 * Land use (LU) and land cover (LC) : LC maps (0.5 m resolution) were derived from Pleiades satellite images acquired in 2013 for Kampala and in 2016 and 2018 for Dar es Salaam. The LC classification was performed using Computer Assisted Photo Interpretation, GEOBIA and machine learning [[7](#7)]. The LU maps (20 m resolution) were produced based on the LC maps and linear information extracted from OpenStreetMap [[8](#8)].
-* Ancillary variables : These are (i) the averaged NDVI and NDWI over period 2005-2019 derived from Landsat 5 and 8 satellite imagery (100 m resolution) and (ii) a SRTM digital elevation model of 2000 (30 m resolution) [[6](#6)]. 
+* Ancillary variables (Base): These are (i) the averaged NDVI and NDWI over period 2005-2019 derived from Landsat 5 and 8 satellite imagery (100 m resolution) and (ii) a SRTM digital elevation model of 2000 (30 m resolution) [[6](#6)]. 
 
 ### Other data
 
@@ -43,10 +43,10 @@ The whole process of modelling and mapping *Pf*PR<sub>2-10</sub> in Kampala and 
 
 #### 1. Select malaria prevalence surveys
 
-Through function `select.malaria.data`, the code selects surveys in the database (1) that were conducted over the 2005-2016 period, (2) that only include participants younger than 16 years old and (3) that are not Demographic and Health Surveys (DHS). You can change the following parameters for selecting malaria surveys : 
+Through function `select.malaria.data`, the code selects surveys in the [database](#malaria-prevalence-data) (1) that were conducted over the 2005-2016 period, (2) that only include participants younger than 16 years old and (3) that are not Demographic and Health Surveys (DHS). You can change the following parameters for selecting malaria surveys : 
 
 * `max_age` : integer defining maximum age of survey participants
-* `survey_date` : R vector with two integers respectively defining the start and end years of the considered time period
+* `survey_date` : vector with two integers respectively defining the start and end years of the considered time period
 * `select_DHS` : boolean defining whether to select DHS or not 
 
 
@@ -60,35 +60,35 @@ Optionally, you can use function `check.correlation` to create correlation matri
 
 #### 3. Create random forest (RF) models
 
-*Pf*PR<sub>2-10</sub> is modelled using RF modelling via the function `rf.modelling`. RF models are built using a 10-repeated 5 folds spatial cross-validation (SCV) with 2 sub-folds for tuning the hyperparameters. Depending on the parameter `cov_selection_mode`, RF models are built using either all input covariates (`ALL`) or implementing a variable selection, i.e. a Recursive Feature Elimination (`RFE`). You can choose to implement RF modelling for three different purposes (defined by the parameter `variables_group`) : 
-1) Build a RF model with all input covariates altogether, i.e. LULC, LCZ and COSMO (`variables_group = "all3Geo"`) ; 
-2) Compare the importance of the different [geospatial datasets](#geospatial-datasets) for modelling *Pf*PR<sub>2-10</sub>, i.e. build RF models with LULC, LCZ and COSMO separately (`variables_group = "GeoSpDt"`). 
+*Pf*PR<sub>2-10</sub> is modelled using RF modelling via the function `rf.modelling`. RF models are built using a 10-repeated 5 folds spatial cross-validation (SCV) with 2 sub-folds for tuning the hyperparameters. Depending on the parameter `cov_selection_mode`, RF models are built using either all input covariates (`ALL`) or implementing a variable selection, i.e. a Recursive Feature Elimination (`RFE`). You can choose to implement RF modelling for two different purposes (defined by the parameter `variables_group`) : 
+1) Build RF models with all input covariates altogether, i.e. Base, LULC, LCZ and COSMO (`variables_group = "all3Geo"`) ; 
+2) Compare the importance of the different [geospatial datasets](#geospatial-datasets) for modelling *Pf*PR<sub>2-10</sub>, i.e. build RF models with Base, LULC, LCZ and COSMO separately (`variables_group = "GeoSpDt"`). 
 
 In brief, you can change the following parameters for RF modelling: 
 
 * `reps`, `folds`, `iters` : integers defining the number of repetitions, folds and sub-folds in the SCV 
+* `cov_selection_mode` : character defining whether to implement a variable selection or not (`"ALL"` or `"RFE"`) 
 * `variables_group` : character defining the purpose of RF modelling (`"all3Geo"` or `"GeoSpDt"`)
-* `cov_selection_mode` : character defining whether to implement a variable selection or not (either `"ALL"` or `"RFE"`) 
- 
+
 
 #### 4. Predict *Pf*PR<sub>2-10</sub>
  
-Function `rf.prediction` is used to predict *Pf*PR<sub>2-10</sub> at 1 km resolution on the [prediction grid](#predgrid). The final predictive map is the average of the predictions made by the 50 models built in SCV (10 repetitions * 5 folds). Additional predictive maps are created by aggregating the *Pf*PR<sub>2-10</sub> predictions by administrative boundaries. You can change the following parameter to define which RF models to use for the predictions: 
+Function `rf.prediction` is used to predict *Pf*PR<sub>2-10</sub> at 1 km resolution using the [prediction grid](#predgrid). The final predictive map is the average of the predictions made by the 50 models built in SCV (10 repetitions * 5 folds). Additional maps are created by aggregating the *Pf*PR<sub>2-10</sub> predictions by administrative boundaries. You can change the following parameter to define which RF models to use for the predictions: 
 
-* `pred_mode` : character defining whether to use RF models implemented with a RFE (`"RFE-<i>"` where `i` is the number of the RFE iteration) or not (`"ALL"`) 
+* `pred_mode` : character defining whether to use RF models implemented with a RFE (`"RFE-<i>"` where `i` is the i<sup>th</sup> RFE iteration) or not (`"ALL"`) 
 
 
 ## Results
 
-The `2_Results` folder is divided into four subfolders : (1) `Malaria_data`, (2) `Covariates`, (3) `RF_modelling` and (4) `Prediction`, which respectively contain the results of the four steps [previously described](#running-the-code). Interesting outputs are : 
+Running this code creates a `Results` folder with four subfolders : (1) `Malaria_data`, (2) `Covariates`, (3) `RF_modelling` and (4) `Prediction`, which respectively contain the results of the [four steps previously described](#running-the-code). Interesting outputs are : 
 
-* `Malaria_data\<city>\malaria_data_<city>.shp` : a shapefile storing the selected malaria data points and their attributes 
-* `Covariates\<city>\<city>_full_cov.csv` : a table storing the extracted covariates used for training the RF models 
-* `Covariates\<city>\Correlation\`: correlation matrices between covariates and the dependant variable 
+* `Malaria_data\<city>\malaria_data_<city>.shp` : a shapefile storing the selected malaria surveys and their attributes 
+* `Covariates\<city>\<city>_full_cov.csv` : a table storing all the extracted covariates used for training the RF models 
+* `Covariates\<city>\Correlation\`: correlation matrices between covariates and the dependent variable 
 * `RF_modelling\<variables_group>\<city>\<cov_selection_mode>\`: RF models, variables importance and dependency plots 
 * `Prediction\<city>\final_plots\`: predictive maps at different resolution (1 km resolution and aggregated by administrative boundaries)
 
-Here are examples of predictive maps of Dar es Salaam produced with these data and material. The left image shows the 1 km resolution predictions with the malaria survey data (black dots) and the right image shows the predictions aggregated by administrative areas (level 5). 
+Here are examples of predictive maps of Dar es Salaam produced with these data and material. The left image shows the 1 km resolution predictions with the malaria survey data (black dots) and the right image shows the predictions aggregated by administrative areas (admin level 5). 
 
 ![alt_text](Pred_map.jpg)
 

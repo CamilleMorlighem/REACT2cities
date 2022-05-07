@@ -1,2 +1,0 @@
-main_MRM is simplified version for github repo 
-main_MRM - copy is the one to use if need to rerun something for paper !!!!!!!!!!!!!!
