@@ -1,0 +1,33 @@
+This is a very-high-resolution map of Kampala derived from satellite imagery of Pleiades (0.5m) collected in February 2013.
+
+The pixel values related to the following legend:
+
+2: Water
+
+3: Tree vegetation
+
+4:Low vegetation
+
+5:Bare ground
+
+6: Artificial ground surface
+
+7:Buildin
+
+8:Shadow
+
+The Out of Bag error of the product is 14,14%. The class errors are:
+
+Water = 0.077748
+
+Tall Vegetation = 0.410714
+
+Low Vegetation = 0.087757
+
+Bare Ground = 0.336689
+
+Artificial Ground Surface = 0.197932
+
+Building = 0.058271
+
+Shadow = 0.062032

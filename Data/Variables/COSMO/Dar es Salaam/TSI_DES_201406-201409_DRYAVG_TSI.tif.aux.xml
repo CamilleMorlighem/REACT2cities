@@ -1,0 +1,34 @@
+<PAMDataset>
+  <Metadata>
+    <MDI key="lat#axis">Y</MDI>
+    <MDI key="lat#long_name">latitude</MDI>
+    <MDI key="lat#standard_name">latitude</MDI>
+    <MDI key="lat#units">degrees_north</MDI>
+    <MDI key="lon#axis">X</MDI>
+    <MDI key="lon#long_name">longitude</MDI>
+    <MDI key="lon#standard_name">longitude</MDI>
+    <MDI key="lon#units">degrees_east</MDI>
+    <MDI key="NC_GLOBAL#CDI">Climate Data Interface version ?? (http://mpimet.mpg.de/cdi)</MDI>
+    <MDI key="NC_GLOBAL#CDO">Climate Data Operators version 1.7.0 (http://mpimet.mpg.de/cdo)</MDI>
+    <MDI key="NC_GLOBAL#Conventions">CF-1.4</MDI>
+    <MDI key="NC_GLOBAL#global attr">Data Source: Based on COSMO-CLM TERRA_URB run over Dar_Es_Salaam for 201406-201409 (see. Brousse et al., 2020)</MDI>
+    <MDI key="NC_GLOBAL#history">Mon Feb 22 13:05:02 2021: cdo setgrid,CCLM_001.txt TSI_DES_201406-201409_AVG.nc TSI_DES_201406-201409_AVG_Grid.nc</MDI>
+    <MDI key="NC_GLOBAL#_NCProperties">version=1|netcdflibversion=4.6.1|hdf5libversion=1.10.2</MDI>
+    <MDI key="TSI#long_name">Averaged Temperature Suitability Index</MDI>
+    <MDI key="TSI#missing_value">nan</MDI>
+    <MDI key="TSI#_FillValue">nan</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <Metadata>
+      <MDI key="long_name">Averaged Temperature Suitability Index</MDI>
+      <MDI key="missing_value">nan</MDI>
+      <MDI key="NETCDF_VARNAME">TSI</MDI>
+      <MDI key="STATISTICS_MAXIMUM">0.87205877157226</MDI>
+      <MDI key="STATISTICS_MEAN">0.79611449620069</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.63795084270825</MDI>
+      <MDI key="STATISTICS_STDDEV">0.042770640122925</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">55.6</MDI>
+      <MDI key="_FillValue">nan</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

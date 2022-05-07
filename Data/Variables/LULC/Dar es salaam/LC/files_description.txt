@@ -1,0 +1,30 @@
+This is a very-high-resolution land cover map of Dar es Salaam derived from satellite imagery (Pleiades, 0.5m resolution). The majority of the area is classified from a 2016 (July) image while a small part of it from two images collected in January and March 2018, respectively.
+
+ The pixel values related to the following legend:
+
+5=tree
+8=shadow
+3=artificial ground surface
+4=low vegetation
+2=water
+7=bare ground
+1=building
+113=high elevated buildings
+112=medium elevated buildings
+111=low elevated buildings
+
+The Out of Bag error of the product is 6,38% with the following class errors:
+
+Building = 0.035826
+
+Water = 0.049934
+
+Artificial Ground Surface = 0.077108
+
+Low Vegetation = 0.108709
+
+Tall Vegetation = 0.062278
+
+Bare Ground = 0.13803
+
+Shadow = 0.019872
