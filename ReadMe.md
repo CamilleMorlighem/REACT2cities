@@ -132,6 +132,5 @@ When using the methodology and/or code presented here, please cite [Morlighem, C
 
 <a id="11"></a>[11] Georganos, S. Malaria in High-Resolution: Modelling and Mapping Plasmodium falciparum Parasite Rate using Very-High-Resolution Satellite Derived Indicators in Sub-Saharan African Cities. Zenodo. 2020. https://doi.org/10.5281/zenodo.3871497.
 
-<a id="12"></a>[12] Morlighem, C*, Chaiban, C*, Georganos, S, Brousse, O, Vandewalle, J, van Lipzig, NPM, Wolff, E, Dujardin, S, Linard, C. Multi-satellite environmental and socio-economic predictors of vector-borne diseases in African cities: malaria as an example. 2022. * authors contributed equally.
-
+<a id="12"></a>[12] Morlighem, C, Chaiban, C, Georganos, S, Brousse, O, Van de Walle, J, van Lipzig, N.P.M, Wolff, E, Dujardin, S, Linard, C. The Multi-Satellite Environmental and Socioeconomic Predictors of Vector-Borne Diseases in African Cities: Malaria as an Example. Remote Sensing. 2022;14(21):5381. https://doi.org/10.3390/rs14215381.
 
