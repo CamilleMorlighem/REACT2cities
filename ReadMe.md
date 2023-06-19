@@ -12,7 +12,7 @@ Fore more information on the data and material presented here see [Morlighem *et
 
 ### Malaria prevalence data 
 
-Malaria prevalence data (see folder `Data\Malaria_data\`) come from an open online malaria database recording survey data from several sources [[1](#4)], such as scientific papers or DHS. The prevalence is measured as the *Plasmodium falciparum* Parasite Rate (i.e. the proportion of people infected by *Pf*) standardised over the two-to-ten age range (*Pf*PR<sub>2-10</sub>) [[2](#5)]. 
+Malaria prevalence data (see folder `Data\Malaria_data\`) come from an open online malaria database recording survey data from several sources [[4](#4)], such as scientific papers or DHS. The prevalence is measured as the *Plasmodium falciparum* Parasite Rate (i.e. the proportion of people infected by *Pf*) standardised over the two-to-ten age range (*Pf*PR<sub>2-10</sub>) [[5](#5)]. 
 
 ### Geospatial datasets
 
