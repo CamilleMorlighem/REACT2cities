@@ -12,15 +12,13 @@
 # - Model : random forest modelling built with
 #       - Spatial cross validation
 #       - Recursive Feature Elimination
-#       - Spatial optimisation methods (optional)
 #
-# This script performs all the following steps to model and predict PfPR2-10:
+# This script implement RF modelling to compare the potential of different sets of predictors to model and predict PfPR2-10.
+# It is done in 3 steps :
 #   1) select malaria surveys
 #   2) extract covariates
-#   3) RF modelling
-#   4) RF predictions
+#   3) RF modelling with datasets comparison
 #--------------------------------------------------------------------------------------------------------------------------
-
 # -------------------------------
 #  Loads libraries
 # -------------------------------
@@ -46,10 +44,7 @@ library(ggplot2)
 library(mlr)
 library(parallelMap)
 library(pdp)
-library(ggpubr)
-library(ggspatial)
 library(stars)
-library(ggsn)
 
 # -------------------------------
 #  Parameters user can change
@@ -63,22 +58,21 @@ my.cluster <- parallel::makeCluster(n_cores, type = "PSOCK")
 doParallel::registerDoParallel(cl = my.cluster)
 
 # Define cities
-ssa_cities = list(#c("Kampala", "Kamp", 32636),
-                  c("Dar es salaam", "DES", 32737),
-                  c("Dakar", "Dakar", 32628))
-                  #c("Ouagadougou", "Ouaga", 32630))
+ssa_cities = list(c("Kampala", "Kamp", 32636),
+                  c("Dar es salaam", "DES", 32737))
 
 # Define criteria for malaria surveys
-max_age = 16 ; survey_date = c(2005,2016) ; select_DHS = T
+max_age = 16 ; survey_date = c(2005,2016) ; select_DHS = F
 
-# Define aim(s) of covariates extraction: 1- "training" ; 2- "prediction" (both can be used)
-cov_extract_aims = c( "training")
+# Define mode:   1- All covariates without variable selection (ALL) ; 2- Implement a Variable selection : Recursive features selection (RFE)
+cov_selection_mode = "ALL"
 
 # Define random forest (RF) parameters for the spatial cross validation in mlr package
 iters = 2 ; folds = 5 ; reps = 10 # value for the paper
 
-# Define spatial optimisation methods : m0, m1, m2
-method = "m1"
+# Define var group :  1 - All covariates from 3 geospatial datasets (all3Geo) - LU/LC, LCZ, COSMO ; 2 - Comparison of different geospatial datasets (GeoSpDt) ;
+var_group_list = c("all3Geo", "GeoSpDt") ; variables_group = var_group_list[1]
+
 
 # -------------------------------
 #  Loads paths
@@ -91,12 +85,9 @@ Dir = sub(pattern='/[^/]*$', "/", x=Dir)
 
 # Define subdirectories
 dir_malaria_data = paste0(Dir, "Results/Malaria_data/")
-dir_pred_grid = paste(Dir, c("Data/Prediction_grid/"), sep="")
-dir_geo_variables = paste(Dir, c("Data/Variables/"), sep="")
-dir_covariates = paste(Dir, c("Results/Covariates/"), sep="")
-dir_rf_models = paste(Dir, c("Results/RF_modelling/"), sep="")
-dir_rf_pred =  paste0(Dir, c("Results/Prediction/"))
-dir_admin_areas = paste0(Dir, c("Data/Admin/"))
+dir_geo_variables = paste0(Dir, c("Data/Variables/"))
+dir_covariates = paste0(Dir, c("Results/Covariates/"))
+dir_rf_models = paste0(Dir, c("Results/RF_modelling/"))
 
 # Define path to malaria DB
 malaria_db = paste0(Dir, "Data/Malaria_data/Malaria_data_v1_SDJ_20200520.xlsx")
@@ -117,9 +108,6 @@ ssa_extents = foreach(i=1:length(ssa_cities), .combine = "c") %do% {
   paste0(dir_geo_variables, "LULC/", ssa_cities[i][[1]][1], "/LU/", ssa_cities[i][[1]][2], "_LU.shp")
 }
 
-ssa_admin2 = foreach(i=1:length(ssa_cities), .combine = "c") %do% {
-    paste0(dir_admin_areas, ssa_cities[i][[1]][1], "/gadm_2.shp")
-}
 
 # -------------------------------
 # Select malaria data
@@ -131,33 +119,14 @@ select.malaria.data(cities = ssa_cities, crs_REACT = crs_project, malaria_data_d
 # -------------------------------
 # Covariates extraction
 # -------------------------------
-foreach(aim_i = 1:length(cov_extract_aims)) %do% {
-
-    covariates.extraction(cities=ssa_cities, crs_REACT = crs_project, aim = cov_extract_aims[aim_i], n.cores = n_cores, Dir_input_malaria_data = dir_malaria_data,
-                        Dir_input_var = dir_geo_variables, Dir_out_cov = dir_covariates, Dir_pred_grid = dir_pred_grid)
-}
-
-# -------------------------------------
-# RF modelling - spatial optimisation
-# -------------------------------------
-if (method!= "m0"){
-    generate.duplicates(cities = ssa_cities, crs_REACT = crs_project, Dir_input_malaria_data = dir_malaria_data, admin_files = ssa_admin2)
-
-    covariates.extraction(cities=ssa_cities, crs_REACT = crs_project, aim = "training", n.cores = n_cores, Dir_input_malaria_data = dir_malaria_data,
-                          Dir_input_var = dir_geo_variables, Dir_out_cov = dir_covariates, Dir_pred_grid = dir_pred_grid, method = method)
-
-}
-
-rf.modelling(cities = ssa_cities, n.cores = n_cores, reps_rf = reps, folds_rf = folds, iters_rf = iters, save_result = "yes",
-             Dir_input_cov = dir_covariates, Dir_input_malaria_data = dir_malaria_data, Dir_output_rf = dir_rf_models, method = method)
-
-# -------------------------------
-# RF predictions
-# -------------------------------
-rf.prediction(cities = ssa_cities, crs_REACT = crs_project, Dir_input_cov = dir_covariates, Dir_input_malaria_data = dir_malaria_data, Dir_output_rf = dir_rf_models, Dir_output_pred = dir_rf_pred, Dir_input_admin = dir_admin_areas, Dir_input_pts = dir_pred_grid, method = method)
+covariates.extraction(cities=ssa_cities, crs_REACT = crs_project, aim = "training", n.cores = n_cores, Dir_input_malaria_data = dir_malaria_data,
+                      Dir_input_var = dir_geo_variables, Dir_out_cov = dir_covariates)
 
 
 # -------------------------------
-# Opt: Descriptive analysis
+# RF modelling
 # -------------------------------
-check.correlation(cities = ssa_cities, crs_REACT = crs_project, input_cov = dir_covariates, input_malaria = dir_malaria_data)
+rf.modelling.comp.datasets(cities = ssa_cities, my_cores = n_cores, mode = cov_selection_mode, reps_rf = reps, folds_rf = folds, iters_rf = iters,
+             var_group = variables_group, input_cov = dir_covariates, input_malaria = dir_malaria_data, output_file_own = dir_rf_models)
+
+
