@@ -1,0 +1,12 @@
+Pixel_value;Class_label;Color(R:G:B)	
+10;Artificial ground surfaces;102:102:102
+12;Buildings;227:26:28
+22;Trees;0:128:0
+23;Low vegetation;29:220:0
+33;Inland waters;30:30:192
+34;Swimming pools;94:221:227
+45;Bare soils;211:217:173
+99;Shadows;0:0:0
+111;Low buildings (< 5m);255:132:56
+112;Medium buildings (5 to 10m);227:26:28
+113;High buildings (> 10m);191:40:186
