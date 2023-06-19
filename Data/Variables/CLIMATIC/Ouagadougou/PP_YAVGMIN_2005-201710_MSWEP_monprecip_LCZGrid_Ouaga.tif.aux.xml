@@ -1,0 +1,52 @@
+<PAMDataset>
+  <Metadata>
+    <MDI key="lat#axis">Y</MDI>
+    <MDI key="lat#long_name">latitude</MDI>
+    <MDI key="lat#standard_name">latitude</MDI>
+    <MDI key="lat#units">degrees_north</MDI>
+    <MDI key="lon#axis">X</MDI>
+    <MDI key="lon#long_name">longitude</MDI>
+    <MDI key="lon#standard_name">longitude</MDI>
+    <MDI key="lon#units">degrees_east</MDI>
+    <MDI key="NC_GLOBAL#CDI">Climate Data Interface version ?? (http://mpimet.mpg.de/cdi)</MDI>
+    <MDI key="NC_GLOBAL#CDO">Climate Data Operators version 1.7.0 (http://mpimet.mpg.de/cdo)</MDI>
+    <MDI key="NC_GLOBAL#Conventions">CF-1.6</MDI>
+    <MDI key="NC_GLOBAL#history">Thu Nov 25 17:28:40 2021: cdo remapcon,/media/OSCAR_05/archive/PfPR_Modelling/Ouagadougou_NDVI.nc /media/OSCAR_05/archive/PfPR_Modelling/Precipitation/MSWEP_v22_precip_monaccum_2005-201710_YAVGMIN.nc /media/OSCAR_05/archive/PfPR_Modelling/Precipitation/Ouagadougou_MSWEP_monprecip_2005-201710_YAVGMIN_LCZGrid.nc
+Tue May 19 11:22:39 2020: cdo timmin MSWEP_v22_precip_monaccum_2005-201710_AVG.nc MSWEP_v22_precip_monaccum_2005-201710_YAVGMIN.nc
+Tue May 19 11:21:32 2020: cdo ymonmean MSWEP_v22_precip_monaccum_2005-201710.nc MSWEP_v22_precip_monaccum_2005-201710_AVG.nc
+Tue May 19 11:18:54 2020: cdo selyear,2005/2017 /media/JONAS_9/data/CORDEX-CORE/observations/precip/MSWEP_v22_precip_monaccum.nc MSWEP_v22_precip_monaccum_2005-201710.nc
+Tue Oct 29 10:54:15 2019: cdo cat MSWEP_v22_precip_monaccum1979.nc MSWEP_v22_precip_monaccum1980.nc MSWEP_v22_precip_monaccum1981.nc MSWEP_v22_precip_monaccum1982.nc MSWEP_v22_precip_monaccum1983.nc MSWEP_v22_precip_monaccum1984.nc MSWEP_v22_precip_monaccum1985.nc MSWEP_v22_precip_monaccum1986.nc MSWEP_v22_precip_monaccum1987.nc MSWEP_v22_precip_monaccum1988.nc MSWEP_v22_precip_monaccum1989.nc MSWEP_v22_precip_monaccum1990.nc MSWEP_v22_precip_monaccum1991.nc MSWEP_v22_precip_monaccum1992.nc MSWEP_v22_precip_monaccum1993.nc MSWEP_v22_precip_monaccum1994.nc MSWEP_v22_precip_monaccum1995.nc MSWEP_v22_precip_monaccum1996.nc MSWEP_v22_precip_monaccum1997.nc MSWEP_v22_precip_monaccum1998.nc MSWEP_v22_precip_monaccum1999.nc MSWEP_v22_precip_monaccum2000.nc MSWEP_v22_precip_monaccum2001.nc MSWEP_v22_precip_monaccum2002.nc MSWEP_v22_precip_monaccum2003.nc MSWEP_v22_precip_monaccum2004.nc MSWEP_v22_precip_monaccum2005.nc MSWEP_v22_precip_monaccum2006.nc MSWEP_v22_precip_monaccum2007.nc MSWEP_v22_precip_monaccum2008.nc
+Mon Oct 28 15:24:53 2019: cdo monsum mswep_v2.2.precipitation.01deg.1d.1979.nc MSWEP_v22_precip_monaccum1979.nc
+Thu Apr 26 06:02:41 2018: cdo -settaxis,1979-01-01,12:00:00,1day /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/processed/netcdf/mswep_v2.2.precipitation.01deg.1d.1979.nc.temp /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/processed/netcdf/mswep_v2.2.precipitation.01deg.1d.1979.nc
+Thu Apr 26 05:56:57 2018: cdo -s -b F32 -f nc4 -z zip_7 -r -cat /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197901.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197902.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197903.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197904.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197905.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197906.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197907.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197908.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197909.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197910.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197911.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/original/197912.nc /net/exo/landclim/data/dataset/MSWEP/v2.2/0.1deg_lat-lon_1d/processed/netcdf/mswep_v2.2.precipitation.01deg.1d.1979.nc.temp</MDI>
+    <MDI key="NC_GLOBAL#_NCProperties">version=1|netcdflibversion=4.5.0|hdf5libversion=1.8.13</MDI>
+    <MDI key="NETCDF_DIM_EXTRA">{time}</MDI>
+    <MDI key="NETCDF_DIM_time_DEF">{1,6}</MDI>
+    <MDI key="NETCDF_DIM_time_VALUES">14060.75</MDI>
+    <MDI key="precipitation#description">Multi-Source Weighted-Ensemble Precipitation (MSWEP)</MDI>
+    <MDI key="precipitation#missing_value">-9999</MDI>
+    <MDI key="precipitation#units">mm/d</MDI>
+    <MDI key="precipitation#_FillValue">-9999</MDI>
+    <MDI key="time#axis">T</MDI>
+    <MDI key="time#bounds">time_bnds</MDI>
+    <MDI key="time#calendar">standard</MDI>
+    <MDI key="time#standard_name">time</MDI>
+    <MDI key="time#units">days since 1979-1-1 12:00:00</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <UnitType>mm/d</UnitType>
+    <Metadata>
+      <MDI key="description">Multi-Source Weighted-Ensemble Precipitation (MSWEP)</MDI>
+      <MDI key="missing_value">-9999</MDI>
+      <MDI key="NETCDF_DIM_time">14060.75</MDI>
+      <MDI key="NETCDF_VARNAME">precipitation</MDI>
+      <MDI key="STATISTICS_MAXIMUM">0.03999999910593</MDI>
+      <MDI key="STATISTICS_MEAN">0.015360260212553</MDI>
+      <MDI key="STATISTICS_MINIMUM">0.0049999998882413</MDI>
+      <MDI key="STATISTICS_STDDEV">0.0055003852432445</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">100</MDI>
+      <MDI key="units">mm/d</MDI>
+      <MDI key="_FillValue">-9999</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>
