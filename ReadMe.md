@@ -72,18 +72,18 @@ Optionally, you can use function `check.correlation` to create correlation matri
 
 #### **Optional** : spatial optimisation methods
 
-Spatial optimisation can be tested to reduce the effect of DHS displacement on model predictive performance. These methods work by creating duplicates of the released DHS data-points in the four cardinal directions (N, S, E, W) at 500 metres and 1000 metres (using function `generate.duplicates`). Covariates are extracted for these duplicates (using function `covariates.extraction` with argument `method` set to `"m1"` or `"m2"`), keeping the same *Pf*PR<sub>2-10</sub> value as the original DHS data-point. Two spatial optimisation methods are then proposed : 
+Spatial optimisation methods can be tested to reduce the effect of DHS displacement on model predictive performance. These methods work by creating duplicates of the released DHS data-points in the four cardinal directions (N, S, E, W) at 500 metres and 1000 metres (using function `generate.duplicates`). Covariates are extracted for these duplicates (using function `covariates.extraction` with argument `method` set to `"m1"` or `"m2"`), keeping the same *Pf*PR<sub>2-10</sub> value as the original DHS data-point. Two spatial optimisation methods are then proposed : 
 
 * `m1` : M1 enriches the spatial feature extraction by using all the duplicates for RF modelling 
 * `m2` : M2 refines the spatial feature extraction by selecting the best set of duplicates over 1000 iterations where the data-points used for RF modelling are randomly selected 
 
-These methods can be incorporated into the RF modelling setting `method = "m1"` or `method = "m2"` in function `rf.modelling`. Note that the default for this argument is`"m0"`, which is the base RF modelling method implemented without spatial optimisation. 
+These methods can be incorporated into the RF modelling step by setting `method = "m1"` or `method = "m2"` in function `rf.modelling`. Note that the default for this argument is`"m0"`, which is the base RF modelling method implemented without spatial optimisation. 
 
 #### 4. Predict *Pf*PR<sub>2-10</sub>
  
 Function `rf.prediction` is used to predict *Pf*PR<sub>2-10</sub> at 1 km resolution using the [prediction grid](#predgrid). The final predictive map is the average of the predictions made by the 50 models built in SCV (10 repetitions * 5 folds). Additional maps are created by aggregating the *Pf*PR<sub>2-10</sub> predictions by administrative boundaries. The following can be changed by the user : 
 
-* `method` : character defining the type of spatial optimisation method to be used for predictions (`"m0"`, `"m1"` or `"m2"`)
+* `method` : character defining the type of spatial optimisation that was used to build the RF models used for predictions (`"m0"`, `"m1"` or `"m2"`) (needed to specify the path of the RF models)
 
 
 #### Additional functionalities 
