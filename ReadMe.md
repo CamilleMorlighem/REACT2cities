@@ -12,7 +12,7 @@ Fore more information on the data and material presented here see [Morlighem *et
 
 ### Malaria prevalence data 
 
-Malaria prevalence data (see folder `Data\Malaria_data\`) come from an open online malaria database recording survey data from several sources [[4](#4)], such as scientific papers or DHS. The prevalence is measured as the *Plasmodium falciparum* Parasite Rate (i.e. the proportion of people infected by *Pf*) standardised over the two-to-ten age range (*Pf*PR<sub>2-10</sub>) [[5](#5)]. 
+Malaria prevalence data <!-- (see folder `Data\Malaria_data\`)  --> come from an open online malaria database recording survey data from several sources from 1900 to 2015 [[4](#4)], such as scientific papers or DHS. The prevalence is measured as the *Plasmodium falciparum* Parasite Rate (i.e. the proportion of people infected by *Pf*) standardised over the two-to-ten age range (*Pf*PR<sub>2-10</sub>) [[5](#5)]. This database is freely available from [this Harvard Dataverse Repository](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/Z29FR0) [[4](#4)]. After downloading the database, save it under folder `Data\Malaria_data\`. 
 
 ### Geospatial datasets
 
@@ -48,7 +48,7 @@ The whole process of modelling and mapping *Pf*PR<sub>2-10</sub> in Dakar, Ouaga
 
 #### 1. Select malaria prevalence surveys
 
-Through function `select.malaria.data`, the code selects surveys in the [database](#malaria-prevalence-data) (1) that were conducted over the 2005-2016 period, and (2) that only include participants younger than 16 years old. You can change the following parameters for selecting malaria surveys : 
+Through function `select.malaria.data`, the code selects surveys in the [database](#malaria-prevalence-data) (1) that were conducted over the 2005-2015 period, and (2) that only include participants younger than 16 years old. You can change the following parameters for selecting malaria surveys : 
 
 * `max_age` : integer defining maximum age of survey participants
 * `survey_date` : vector with two integers respectively defining the start and end years of the considered time period
@@ -133,7 +133,7 @@ When using the methodology and/or code presented here, please cite [Morlighem *e
 
 <a id="2"></a>[2] Morlighem, C, Chaiban, C, Georganos, S, Brousse, O, Van de Walle, J, van Lipzig, N.P.M, Wolff, E, Dujardin, S & Linard, C. The Multi-Satellite Environmental and Socioeconomic Predictors of Vector-Borne Diseases in African Cities: Malaria as an Example. Remote Sensing. 2022;14(21):5381. doi.org/10.3390/rs14215381.
 
-<a id="4"></a>[4] Snow, RW. The prevalence of Plasmodium falciparum in sub Saharan Africa since 1900. Harvard Dataverse. 2017.doi/10.7910/DVN/Z29FR0.
+<a id="4"></a>[4] Snow, RW. The prevalence of Plasmodium falciparum in sub Saharan Africa since 1900. Harvard Dataverse. 2017.doi/10.7910/DVN/Z29FR0. https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/Z29FR0. 
 
 <a id="5"></a>[5] Snow, RW, Sartorius, B, Kyalo, D, Maina, J, Amratia, P, Mundia, CW, Bejon, P, & Noor, AM. The prevalence of Plasmodium falciparum in sub-Saharan Africa since 1900. Nature. 2017;550(7677):515-518. doi.org/10.1038/nature24059. 
 
